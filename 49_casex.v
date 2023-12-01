@@ -1,4 +1,4 @@
-//casex keyword
+//casex,casez keywords
 /*
 1.there are two variations of the case statement.
   1.casex:- treates all x and z values in the case item or the case expression as don't care.
@@ -7,6 +7,7 @@
 
 //Example:-
 //casex construct assigns priority based on the case values
+//code-1 casex
 module Casex;
   reg [3:0]encode;
   always@(encode)
@@ -79,5 +80,54 @@ module Casex;
       encode=4'bxxxx;
       #10;
       encode=4'bzzzz;
+    end
+endmodule
+
+//code-2 casez
+module Casez;
+  reg [3:0]inputs;
+  always@(inputs)
+    begin
+      casez(inputs)
+        4'b0000:
+          begin
+            $display("exact match priority1:- inputs=%b",inputs);
+          end
+        4'b0xxx:
+          begin
+            $display("first bit 0 and rest are don't care-priority2:- inputs=%b",inputs);
+          end
+        4'b0zzz:
+          begin
+            $display("first bit 0 and reset are unknown('z')-lowest priority:- inputs=%b",inputs);
+          end
+        default:
+          begin
+            $display("None of the above:- inputs=%b",inputs);
+          end
+      endcase
+    end
+  
+  initial
+    begin
+      inputs=4'b0000;
+      #10;
+      inputs=4'b0101;
+      #10;
+      inputs=4'b0xxx;
+      #10;
+      inputs=4'b0zzz;
+      #10;
+      inputs=4'b1001;
+      #10;
+      inputs=4'b1111;
+      #10;
+      inputs=4'b0101;
+      #10;
+      inputs=4'bx10x;
+      #10;
+      inputs=4'bz101;
+      #10;
+      inputs=4'b0101;
     end
 endmodule
