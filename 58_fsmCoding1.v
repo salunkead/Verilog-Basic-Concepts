@@ -1,8 +1,4 @@
-//FSM coding style1
-/*
-
-*/
-
+//FSM coding style - 1
 //Example- Design Module-1001 mealy detector
 module _1001detector(input clk,rst,input in,output out);
   parameter s0=2'b00,
@@ -61,4 +57,33 @@ module _1001detector(input clk,rst,input in,output out);
     end
   //continuous assignment outputs
   assign out=(pstate==s3 && in==1)?1'b1:1'b0;
+endmodule
+
+//testbench module
+module tb;
+  reg clk,rst,in;
+  wire out;
+  reg [3:0] temp;
+  _1001detector dut(clk,rst,in,out);
+  initial clk=1'b0;
+  always #10 clk=~clk;
+  initial
+    begin
+      rst=1;
+      in=0;
+      #25;
+      rst=0;
+      temp=4'b1001;
+      for(integer i=0;i<4;i=i+1)
+        begin
+          @(negedge clk)
+          in=temp[i];
+        end
+    end
+  initial
+    begin
+      $dumpfile("fsm.vcd");
+      $dumpvars(0,dut);
+      #150 $finish;
+    end
 endmodule
