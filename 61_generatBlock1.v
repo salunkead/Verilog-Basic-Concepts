@@ -1,16 +1,17 @@
 //Generate Block - generate for loop
 /*
-1. The generate statement in Verilog is a very useful construct that generates synthesizable code
+1. the generate statement in Verilog is a very useful construct that generates synthesizable code
 2. the generate block is used for following things
     1.To generate multiple module instances.
     2.Conditionally instantiate a block of code based on the Verilog parameter, however, the parameter is not permitted in the generate statement.
 3. syntax:- generate
              //statements
             endgenerate
-4. The generate loop is similar to the for loop statement, but it uses genvar keyword as a loop variable. 
-5. The genvar keyword is only used during the evaluation of generate block and does not exist during the simulation of the design. It needs to be used by a generate loop.
-6. Generate loop provides flexibility to reduce code lines by replacing repetitive statements to a single statement like for loop.
-7. Similar to a for loop, generate loops also can be nested with different genvar as an index variable
+4. the generate loop is similar to the for loop statement, but it uses genvar keyword as a loop variable.
+5. genvar is an integer variable which must be a positive value.they may only be used inside generate block.they can be declared inside or outside generate block.
+6. the genvar keyword is only used during the evaluation of generate block and does not exist during the simulation of the design. It needs to be used by a generate loop.
+7. generate loop provides flexibility to reduce code lines by replacing repetitive statements to a single statement like for loop.
+8. similar to a for loop, generate loops also can be nested with different genvar as an index variable
 */
 
 //Example- 10 bit substractor using full substractor
